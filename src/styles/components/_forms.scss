@@ -1,0 +1,43 @@
+label {
+  display: block;
+  margin-bottom: spacing(half);
+}
+
+#{$all-text-inputs} {
+  display: block;
+  width: 100%;
+  padding: (spacing(half) - 2px);
+  border: 1px solid $color-grey-x-light;
+  border-radius: $base-border-radius;
+
+  .has-error & {
+    border-color: $color-accent;
+  }
+
+  .input--inline & {
+    display: inline-block;
+    max-width: 300px;
+    margin-right: spacing(half);
+  }
+}
+
+.error-message {
+  @include font-size($milli-size);
+  color: $color-accent;
+}
+
+.input__row, .input__column {
+  @include clearfix;
+  margin-bottom: spacing();
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@include media($tall) {
+  .input__column {
+    @include span-columns($grid-columns / 2);
+    margin-bottom: 0;
+  }
+}

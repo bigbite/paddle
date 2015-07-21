@@ -1,0 +1,38 @@
+/// Calculate rem size based on pixel size and context.
+/// @link https://github.com/ultimate-package/tools.rem-calc
+/// @param {number} $target - Pixel size, multiple sizes as a list.
+/// @param {string} $context [$base-font-size] - Context
+/// @require {variable} $base-font-size
+/// @return {string} Rem value
+/// @example scss
+/// h1 {
+///  margin-bottom: rem-calc(30);
+///  padding: rem-calc(10 20 30 40);
+/// }
+/// @example css
+/// h1 {
+///   margin-bottom: 1.875rem;
+///   padding: 0.625rem 1.25rem 1.875rem 2.5rem;
+/// }
+@function rem-calc($target, $context: $base-font-size) {
+
+  $max: length($target);
+  $values: ();
+
+  @for $i from 1 through $max {
+    $x: 0;
+
+    // Export REM value of $target depending on base-font-size
+    $x: (nth($target, $i) / $context) * 1rem;
+
+    @if abs($x) == 0 {
+      $values: append($values, 0);
+    }
+
+    @else {
+      $values: append($values, $x);
+    }
+  }
+
+  @return $values;
+}

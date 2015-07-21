@@ -1,0 +1,65 @@
+/**
+ * Headings.
+ */
+@include headings(1, 6) {
+  font-weight: 400;
+  color: $heading-color;
+}
+
+h1, .alpha, %alpha {
+  @include font-size($h1-size);
+}
+
+h2, .bravo, %bravo {
+  @include font-size($h2-size);
+}
+
+h3, .charlie, %charlie {
+  @include font-size($h3-size);
+}
+
+h4, .delta, %delta {
+  @include font-size($h4-size);
+}
+
+h5, .echo, %echo {
+  @include font-size($h5-size);
+}
+
+h6, .foxtrot, %foxtrot {
+  @include font-size($h6-size);
+}
+
+/**
+ * Lede.
+ */
+.lede, %lede {
+  @include font-size($lede-size);
+}
+
+/**
+ * Large type
+ */
+.giga, %giga {
+  @include font-size($giga-size);
+}
+
+.mega, %mega {
+  @include font-size($mega-size);
+}
+
+.kilo, %kilo {
+  @include font-size($kilo-size);
+}
+
+/**
+ * Small type.
+ */
+small,
+.milli, %milli {
+  @include font-size($milli-size);
+}
+
+.micro, %micro {
+  @include font-size($micro-size);
+}

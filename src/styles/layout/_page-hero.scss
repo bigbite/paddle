@@ -1,0 +1,28 @@
+.page-hero {
+  padding: spacing(quadruple);
+  text-align: center;
+
+  &__logo {
+    min-width: 100%;
+
+    img {
+      display: block;
+      min-width: 100%;
+    }
+
+    &-wrapper {
+      margin: 0 auto;
+      max-width: 110px;
+    }
+  }
+
+  &__title {
+    @include font-size(30px);
+    margin: spacing() 0 0;
+    font-weight: 300;
+  }
+
+  &__cta {
+    margin-top: spacing() !important;
+  }
+}

@@ -1,0 +1,61 @@
+/// Enable grid classes
+/// @type Boolean
+/// @example
+/// .gw-1, .gw-2, .gw-3 etc.
+$enable-grid-classes: true;
+
+/// Turn on to debug the grid classes
+/// @type Boolean
+$debug-grid-classes: true;
+
+@if ($debug-grid-classes) {
+  [class^="gw-"] {
+    background: #eee;
+  }
+}
+
+@if ($enable-grid-classes) {
+
+  // Wrap grid glasses in a row for auto omega, else use `g--omega`
+  .row {
+    @include row();
+    margin-bottom: spacing();
+  }
+
+  // Set up base grid styles
+  [class^="gw-"] {
+    float: left;
+    display: block;
+
+    // Remove margin from the last child.
+    // Needs to be wrapped in a row to work per row.
+    &:last-child {
+      margin-right: 0;
+    }
+
+    // Full width at breaking point
+    @include media($tall) {
+      @include grid-width(12);
+      margin-right: 0;
+      margin-bottom: spacing();
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Generate grid widths.
+  // $grid-columns is a Neat variable set in `_grid-settings.scss`
+  @for $i from 1 through $grid-columns {
+    .gw-#{$i} {
+      @include grid-width($i);
+      @include gutter-width($i);
+    }
+  }
+
+  // Class access to Neat's omega mixin
+  .omega {
+    @include omega;
+  }
+}

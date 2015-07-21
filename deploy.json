@@ -1,0 +1,16 @@
+{
+  "commands": [
+    "composer install",
+    "php artisan cache:clear",
+    "php artisan migrate --force",
+    "php artisan optimize",
+    "sudo supervisorctl reload"
+  ],
+  "storage": {
+    "bootstrap/cache": 775,
+    "storage": 775
+  },
+  "permissions": {
+    "public/.htaccess": 644
+  }
+}

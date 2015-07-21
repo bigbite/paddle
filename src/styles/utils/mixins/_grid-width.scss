@@ -1,0 +1,13 @@
+/// Calculate Neat's grid width without the extra styles.
+/// @author Jon McPartland
+/// @param {number} $span - Columns the element is spanning across
+/// @example SCSS
+///   .element {
+///     @include grid-width(6)
+///   }
+@mixin grid-width($span: $columns of $container-columns) {
+  $columns: nth($span, 1);
+  $container-columns: container-span($span);
+
+  width: flex-grid($columns, $container-columns);
+}

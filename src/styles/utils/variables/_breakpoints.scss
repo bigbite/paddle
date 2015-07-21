@@ -1,0 +1,16 @@
+////
+/// Breakpoint settings for Neat.
+/// @group Defaults
+/// @see Neat's documentation
+////
+
+// Desktop first or mobile first
+$default-feature: min-width !global;
+
+// Breakpoints
+$demi:   new-breakpoint(em(340px));
+$short:  new-breakpoint(em(480px));
+$tall:   new-breakpoint(em(560px));
+$grande: new-breakpoint(em(680px));
+$venti:  new-breakpoint(em(760px));
+$trenta: new-breakpoint($max-width);

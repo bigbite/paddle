@@ -1,0 +1,25 @@
+////
+/// Grid settings for Neat
+/// @group Defaults
+/// @see Neat's documentation
+////
+
+/// Turn off Neat's box-sizing
+/// @type Bool
+$border-box-sizing: false !global;
+
+/// Column size
+/// @type Number (Unit)
+$column: em(74px) !global;
+
+/// Gutter size
+/// @type Number (Unit)
+$gutter: em(32px) !global;
+
+/// Amount of columns
+/// @type Number
+$grid-columns: 8 !global;
+
+/// Max width of grid
+/// @type Number (Unit)
+$max-width: em(816px) !global;

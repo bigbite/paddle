@@ -1,0 +1,205 @@
+/**
+ * Media object.
+ *
+ * Extention modifiers:
+ * - Flip             [flip]   Flips the figure to the opposite side
+ * - Stack            [stack]  Stacks the figure on top of the text
+ * - Wrap             [wrap]   Wraps the text around the figure
+ * - Vertical align   [valign] Vertical aligns the figure with the text
+ */
+
+/// Create media sizes.
+/// @example
+/// $media-figure-sizes: (
+///   "large": "180px"
+/// );
+/// <div class="media media--large">
+$media-figure-sizes: (
+  "large": "180px",
+  "medium": "140px",
+  "small": "100px"
+) !default;
+
+/// Media spacing amount.
+$media-spacing: spacing() !default;
+
+.media {
+  @include clearfix;
+  margin-bottom: $media-spacing;
+
+  /**
+   *  Media figure.
+   *
+   *  1. Accomodate if figure is wrapping div or img.
+   */
+  &__figure {
+    float: left;
+    margin-right: $media-spacing;
+
+    &, > img { /* 1 */
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+  /**
+   * Media body.
+   *
+   * 1. Prevent text wrapping.
+   * 2. Remove margin from last media object, and also the last element inside.
+   */
+  &__body {
+    overflow: hidden; /* 1 */
+
+    &:last-child, > *:last-child {
+      margin-bottom: 0; /* 2 */
+    }
+  }
+
+  /**
+   * Media flipped.
+   *
+   * 1. Resetting the default right margin.
+   */
+  &--flip > &__figure {
+    float: right;
+    margin-right: 0; /* 1 */
+    margin-left: $media-spacing;
+  }
+
+  /**
+   * Media stacked.
+   */
+  &--stack {
+    text-align: center;
+  }
+
+  &--stack > &__figure {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: $media-spacing;
+  }
+
+  /**
+   * Media wrap text around image.
+   */
+  &--wrap > &__body {
+    overflow: visible;
+  }
+
+  /**
+   * Media vertically aligned.
+   *
+   * 1. Because table-cell ignores margin.
+   * 2. Centres media sizes image.
+   */
+  &--valign {
+    display: table;
+
+    > .media__figure,
+    > .media__body {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    > .media__figure {
+      float: none;
+      margin: auto; /* 2 */
+      padding-right: $media-spacing; /* 1 */
+
+      img {
+        display: block;
+        max-width: none;
+      }
+    }
+
+    > .media__body {
+      width: 100%;
+    }
+
+    &.media--flip {
+      direction: rtl;
+
+      .media__body {
+        direction: ltr;
+      }
+
+      .media__figure {
+        padding-right: 0;
+        padding-left: $media-spacing;
+      }
+    }
+  }
+
+  /**
+   * Media figure sizes.
+   */
+  @each $key, $value in $media-figure-sizes {
+    &--#{$key} > &__figure {
+      width: #{$value};
+
+      img {
+        width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    // Targets the figure img elem when using valign _and_ a size.
+    &.media--valign.media--#{$key} > &__figure img {
+      width: #{$value};
+    }
+  }
+}
+
+/**
+ * Media breaking point. Wrapped in one MQ for sanity.
+ */
+@include media($short) {
+  .media {
+    text-align: center;
+
+    /**
+     * Standard media object resetting.
+     *
+     * 1. Resets the margin for normal and flipped.
+     * 2. So we can center the image. Covers when using valign.
+     */
+    &__figure {
+      float: none;
+      width: 100%;
+      margin: auto 0 $media-spacing; /* 1 */
+
+      img {
+        &,
+        .media--valign & {
+          display: inline-block; /* 2 */
+        }
+      }
+    }
+
+    /**
+     * Vertical aligned media object resetting.
+     *
+     * 1. Reset setting table layout neccessary for vertical aligning.
+     * 2. Resets text direction hack for flipped valign.
+     * 3. Reset padding, valign uses padding rather than margin.
+     */
+    &--valign {
+      &,
+      > .media__figure,
+      > .media__body {
+        display: block; /* 1 */
+
+        &.media--flip {
+          direction: ltr; /* 2 */
+        }
+      }
+
+      > .media__figure {
+        padding-right: 0; /* 3 */
+        padding-left: 0; /* 3 */
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+/**
+ * Base button styles.
+ * 1. Corrects inability to style clickable `input` types in iOS.
+ * 2. Normalize `box-sizing` across all elements that this component could be
+ *    applied to.
+ * 3. Normalize `line-height`. For `input`, it can't be changed from `normal` in Firefox 4+.
+ * 4. Prevent button text from being selectable.
+ * 5. Make sure `input` will wrap text across multiple lines.
+ */
+%btn-base {
+  -webkit-appearance: none; /* 1 */
+  box-sizing: border-box; /* 2 */
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+  font: inherit;
+  line-height: normal; /* 3 */
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  overflow: visible;
+  user-select: none; /* 4 */
+  white-space: normal; /* 5 */
+  transition: color .15s, border .15s, background .15s, box-shadow .15s;
+
+  @include on-event(true) {
+    text-decoration: none;
+  }
+}
+
+
+/**
+ * Primary button.
+ */
+.btn,
+a.btn,
+input.btn {
+  @extend %btn-base;
+  padding: (spacing(half) + $base-border-size) (spacing() + $base-border-size);
+  color: #fff;
+  background-color: $color-primary;
+  border-radius: spacing();
+  box-shadow: inset 0 -#{$base-border-size} 0 shade($color-primary, 12%);
+
+  [class^="ico-"]::before,
+  [class*=" ico-"]::before {
+    vertical-align: middle;
+  }
+
+  @include on-event {
+    color: #fff;
+    background-color: tint($color-primary, 15%);
+    border-color: tint($color-primary, 15%);
+    box-shadow: inset 0 -#{$base-border-size} 0 $color-primary;
+  }
+
+  &--large {
+    @include font-size($lede-size, false);
+    padding: (spacing() + $base-border-size) (spacing(double) + $base-border-size);
+    border-radius: spacing(double);
+  }
+
+  &--small {
+    @include font-size($milli-size, false);
+    padding: (spacing(.438) + $base-border-size) (spacing(.75) + $base-border-size);
+    border-radius: spacing();
+  }
+
+  // &--outline {
+  //   background: none;
+  //   border: $base-border-size solid $color-primary;
+  //   color: $color-primary;
+  //   box-shadow: none;
+
+  //   @include on-event {
+  //     background-color: $color-primary;
+  //     border-color: $color-primary;
+  //   }
+  // }
+
+  &--fill {
+    display: block;
+    width: 100%;
+  }
+
+  &--danger {
+    background-color: $color-accent;
+    border-color: $color-accent;
+    box-shadow: inset 0 -#{$base-border-size} 0 shade($color-accent, 12%);
+
+    @include on-event {
+      color: #fff;
+      background-color: tint($color-accent, 15%);
+      border-color: tint($color-accent, 15%);
+      box-shadow: inset 0 -#{$base-border-size} 0 $color-accent;
+    }
+  }
+
+  &--success {
+    background-color: $color-success;
+    border-color: $color-success;
+    box-shadow: inset 0 -#{$base-border-size} 0 shade($color-success, 12%);
+
+    @include on-event {
+      color: #fff;
+      background-color: tint($color-success, 15%);
+      border-color: tint($color-success, 15%);
+      box-shadow: inset 0 -#{$base-border-size} 0 $color-success;
+    }
+  }
+
+  &--light {
+    color: $link-color;
+    background-color: #f0f3f5;
+    border-color: #f0f3f5;
+    box-shadow: none;
+
+    @include on-event {
+      color: $link-color;
+      background-color: shade(#f0f3f5, 15%);
+      border-color: shade(#f0f3f5, 15%);
+      box-shadow: none;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+////
+/// @group Defaults
+/// @type Number (Unit)
+////
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,300);
+
+/// Primary font family.
+/// @type String (List)
+$font-family-primary:   "Roboto", serif !default;
+
+/// Secondary font family.
+/// @type String (List)
+$font-family-secondary: $font-family-primary;
+
+/// Sets the base font size.
+$base-font-size:   16px !default;
+
+/// Sets the base line height.
+$base-line-height: 24px !default;
+
+//
+// Heading sizes
+//
+
+/// H1 size. Doubled up as `.alpha`.
+$h1-size:    $base-font-size * 2.25 !default;
+
+/// H2 size. Doubled up as `.beta`.
+$h2-size:    $base-font-size * 2    !default;
+
+/// H3 size. Doubled up as `.gamma`.
+$h3-size:    $base-font-size * 1.75 !default;
+
+/// H4 size. Doubled up as `.delta`.
+$h4-size:    $base-font-size * 1.5  !default;
+
+/// H5 size. Doubled up as `.epsilon`.
+$h5-size:    $base-font-size * 1.25 !default;
+
+/// H6 size. Doubled up as `.zeta`.
+$h6-size:    $base-font-size        !default;
+
+/// A "lede" size, generally used for intro paragraphs - `.lede`.
+$lede-size:  $base-font-size * 1.25 !default;
+
+//
+//  Large sizes.
+//
+
+/// `.giga`.
+$giga-size:  $base-font-size * 3    !default;
+
+/// `.mega`.
+$mega-size:  $base-font-size * 2.75 !default;
+
+/// `.kilo`.
+$kilo-size:  $base-font-size * 2.5  !default;
+
+
+//
+// Small sizes.
+//
+
+/// `.milli`.
+$milli-size: round($base-font-size * 0.9) !default;
+
+
+/// `.micro`.
+$micro-size: round($base-font-size * 0.8) !default;
+
+
+//
+// Misc. variables.
+//
+
+///  Set `$em-base`, required for Bourbon's `rem()` function
+///  @require $base-font-size
+///  @access private
+$em-base: $base-font-size;
+
+/// Unitless line-height ratio (e.g 16px/24px = 1.5)
+/// @require $base-line-height
+/// @require $base-font-size
+///  @access private
+$line-height-ratio: $base-line-height / $base-font-size;
+
+/// Spacing for vertical rhythm based off the line-height.
+/// @group Defaults
+/// @require $base-line-height
+/// @see {function} spacing
+/// @example scss - Use modifiers for easy sizing adjustments.
+/// .foo {
+///   margin-top:    $spacing-unit;
+///   margin-bottom: $spacing-unit--double;
+///   margin-left:   $spacing-unit--half;
+/// }
+$spacing-unit: $base-line-height !default;
+
+/// Double `$spacing-unit`.
+$spacing-unit--double:  round($spacing-unit * 2);
+
+/// Half `$spacing-unit`.
+$spacing-unit--half:    round($spacing-unit / 2);
+
+/// Half `$spacing-unit`.
+$spacing-unit--quad:    round($spacing-unit * 4);
+
+/// Half `$spacing-unit`.
+$spacing-unit--quarter: round($spacing-unit / 4);
+
+/// Global border radius.
+$base-border-radius: 4px !default;
+
+/// Global border size.
+$base-border-size: 2px !default;

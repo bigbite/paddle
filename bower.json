@@ -1,0 +1,28 @@
+{
+  "name": "quick-start",
+  "version": "0.1.0",
+  "authors": [
+    "Big Bite Creative"
+  ],
+  "description": "Quick Start Project",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.2.2",
+    "neat": "~1.7.2"
+  },
+  "overrides": {
+    "bourbon": {
+      "ignore": true
+    },
+    "neat": {
+      "ignore": true
+    }
+  }
+}

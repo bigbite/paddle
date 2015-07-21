@@ -1,0 +1,25 @@
+/// A Quick way of adding :hover, :active and :focus events.
+/// @param {boolean} $self [false] - If it is to include self state
+/// @example scss - SCSS
+/// a {
+///   color: blue;
+///
+///   @include on-event {
+///     color: red;
+///   }
+/// }
+/// @example css - Output
+/// a {
+///   color: blue;
+/// }
+///
+/// a:hover, a:active, a:focus {
+///   color: red;
+/// }
+@mixin on-event($self: false) {
+  @if $self {
+    &, &:hover, &:active, &:focus { @content }
+  } @else {
+    &:hover, &:active, &:focus { @content }
+  }
+}

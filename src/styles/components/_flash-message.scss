@@ -1,0 +1,35 @@
+.flash-message {
+  position: relative;
+  padding: spacing(.75);
+  background: $color-grey-x-light;
+  border-radius: $base-border-radius;
+  margin: spacing() 0 0;
+
+  [class^="ico-"]::before,
+  [class*=" ico-"]::before {
+    vertical-align: middle;
+  }
+
+  &--success {
+    color: #fff;
+    background: $color-success;
+  }
+
+  &--error {
+    color: #fff;
+    background: $color-accent;
+  }
+
+  .dismiss {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 4px 8px;
+    opacity: 0.5;
+    text-align: right;
+    font-size: 24px;
+  }
+}

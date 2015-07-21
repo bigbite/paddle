@@ -1,0 +1,34 @@
+.release-group {
+  @include clearfix;
+  margin-bottom: spacing(half);
+
+  @include media($tall) {
+    max-width: 300px;
+  }
+
+  & > &__input {
+    @include span-columns($grid-columns * .45);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0 !important;
+    padding-left: spacing();
+    border-right: none;
+
+    @include media($tall) {
+      @include span-columns($grid-columns * .65);
+    }
+  }
+
+  & > &__btn {
+    @include span-columns($grid-columns * .55);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0 !important;
+    padding-left: spacing(half);
+    border-left: none;
+
+    @include media($tall) {
+      @include span-columns($grid-columns * .35);
+    }
+  }
+}

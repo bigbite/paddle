@@ -1,0 +1,32 @@
+/**
+ * Main Colors
+ */
+.color-primary {
+  color: $color-primary !important;
+}
+
+.color-secondary {
+  color: $color-secondary !important;
+}
+
+.color-accent {
+  color: $color-accent !important;
+}
+
+/**
+ * State Colors
+ */
+.color-success {
+  color: $color-primary !important;
+}
+
+.color-error {
+  color: $color-accent !important;
+}
+
+/**
+ * Muted Colors
+ */
+.muted, .color-muted {
+  opacity: .56;
+}

@@ -1,0 +1,12 @@
+.section {
+  padding: spacing(double) 0;
+
+  &__title {
+    @include font-size($h2-size);
+  }
+
+  &__description {
+    margin-top: -(spacing());
+    margin-bottom: spacing(double);
+  }
+}

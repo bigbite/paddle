@@ -1,0 +1,13 @@
+/// Calculate Neat's gutter margin.
+/// @author Jon McPartland
+/// @param {number} $span - Columns the element is spanning across
+/// @example SCSS
+///   .element {
+///     @include gutter(6)
+///   }
+@mixin gutter-width($span: $columns of $container-columns) {
+  $columns: nth($span, 1);
+  $container-columns: container-span($span);
+
+  margin-right: flex-gutter($container-columns);
+}

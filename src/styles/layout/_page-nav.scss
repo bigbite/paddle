@@ -1,0 +1,43 @@
+.page-nav {
+  display: inline-block;
+  float: right;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /**
+   * Elements
+   */
+  &__item {
+    display: inline-block;
+    padding: 0 spacing(half);
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    padding-bottom: 0;
+    border-bottom: none;
+    font-weight: normal;
+  }
+
+
+  /**
+   * Modifiers
+   */
+  &--primary {
+    // ...
+    display: inline-block;
+  }
+
+  &--secondary {
+    // ...
+    display: inline-block;
+  }
+}

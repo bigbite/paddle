@@ -1,0 +1,18 @@
+blockquote {
+  border-left: $base-border-size solid $color-primary;
+  padding-left: spacing();
+
+  cite {
+    position: relative;
+    display: block;
+    padding-left: spacing();
+    font-size: $milli-size;
+
+    &:before {
+      content: "\2014 \2009";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}

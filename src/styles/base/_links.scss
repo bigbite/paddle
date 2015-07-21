@@ -1,0 +1,16 @@
+a {
+  &,
+  &:visited {
+    text-decoration: none;
+    color: $link-color;
+    padding-bottom: spacing(quarter);
+    border-bottom: 1px solid $color-grey-x-light;
+    transition: color .3s ease-in-out;
+    font-weight: 500;
+  }
+
+  @include on-event {
+    color: tint($link-color, 15%);
+    border-color: tint($color-grey-x-light, 15%);
+  }
+}

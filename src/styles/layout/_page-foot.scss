@@ -1,0 +1,29 @@
+.page-foot {
+
+  .container {
+    padding-top: spacing(1.5);
+    padding-bottom: spacing(1.5);
+    border-top: 1px solid $color-grey-x-light;
+  }
+
+  &__content {
+    @include font-size(14px);
+    margin-bottom: 0;
+    text-align: center;
+    padding-bottom: spacing(quarter);
+
+    @include media($tall) {
+      @include span-columns($grid-columns / 3);
+      text-align: left;
+      padding-bottom: 0;
+
+      &--center {
+        text-align: center;
+      }
+
+      &--right {
+        text-align: right;
+      }
+    }
+  }
+}
