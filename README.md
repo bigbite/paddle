@@ -1,47 +1,81 @@
-# Base
-> A base for kickstarting projects.
+# Paddle
 
-## The New Hotness (JS)
-We’re now using Webpack to build our JS, for several reasons. Firstly, it allows us to use ES6 modules in all their glory; secondly, it manages our dependencies/third-party libraries without us having to dump the source files into a static folder, or run separate Bower tasks to bundle them up.
+> A modified [Ship](ship.getherbert.com).
 
-You’ll notice that there is a new `webpack.config.js` file in the root; there’s a lot of content in there, but there are only a couple of things you need worry about. We pre-build with jQuery, lodash, and Postal, so you’ll only touch the config if you require additional libraries (such as socket.io, React, etc).
 
-To require an additional third-party library, ‘install’ it via npm, if available, or bower. Once that’s done, you’ll need to add it to the vendor array of the module.exports object [here](http://jon.moe/1cVUx/Qph9BEvi). To make the library available to your modules, import it into any modules that require it, or if it will be used a lot, you can automatically provide it to all modules by adding it to Webpacks’s ProvidePlugin object [here](http://jon.moe/1krpX/TD1TZeXN).
+## Installation
 
-If you require the library to be available to the DOM, you will need to export it from the main `app.js` file, as we have with Postal, [here](http://jon.moe/13QaZ/1P7l4hPX). That’s it!
+If you're deploying with Peggy, it's really simple. Add it to Peggy, setup the [Environment](#environment), press Deploy.
 
-### Building webpack bundles.
-Run `gulp webpack:build`, and your library will now be available for use. `gulp watch` will run `webpack:build-dev`, which will not Uglify code, so make sure to run `gulp webpack:build` before committing.
+Otherwise:
+ * `git clone git@github.com:bigbitecreative/pebble.git`
+ * Setup the [Environment](#environment)
 
-## Documentation
-### Sass
-See Sass documentation by running `sassdoc:serve`.
+On each deploy there-after:
+ * `composer install`
+ * `php artisan cache:clear`
+ * `php artisan migrate --force`
+ * `php artisan optimize`
+ * `sudo supervisorctl reload`
 
-## Gulp tasks
-### Core
-- `default` - Runs styles, bower, scripts, static, images.
-- `build` - Cleans, then runs default task.
 
-### Individual
-- `bower` — Compiles Bower components.
-- `browser-sync` — Launches BrowserSync server, watches files for change. Use `--open` flag to open page in browser. Use `--noftify` flag to enable in-browser BowserSync notifications.
-- `clean` - Cleans out the build files.
-- `docs` - Spin up a local server to view docs.
-- `images` - Compresses `.{jpg,jpeg,png,gif,svg}` in `src/images/`
-- `sassdoc` - Generate Sass documentation in `docs/sassdoc/`.
-- `serve` - Spin up a HTTP server with LiveReload. Use `--open` flag to open page in browser.
-- `static` - Compile assets in `src/static` individually. Useful for fonts and single scripts etc.
-- `styles` - Compile Sass from `src/styles/`.
-- `svg2png` - Convert .svg files in `src/images/` to `.png`.
-- `watch` - Watch files for change, with LiveReload.
-- `webpack:build-dev` - Webpack development build. Includes sourcemaps and no uglify. Used by `watch`.
-- `webpack:build` - Webpack production build. Uglifies.
+## Worker
 
-### Environment flags
-Use the `--production` flag to run in production mode. This minifies Sass and uglifies JS. When using the `--production` flag, image tasks will be ignored.
+You're going to need to setup a supervisor worker:
+```
+[program:paddle-queue-listener]
+user=root
+command=php /path/to/paddle/artisan queue:listen --tries=3 --sleep=3 --timeout=60
+directory=/
+stdout_logfile=/var/log/worker-paddle-queue-listener.log
+redirect_stderr=true
+autostart=true
+autorestart=true
+process_name=%(program_name)s_%(process_num)s
+numprocs=5
+numprocs_start=0
+```
 
-### Server build
-Run `npm run build` on the server to run server specific tasks in production mode. An alias for `gulp server-build --production`.
 
-### Tests
-- `test:js-unit` - Run JavaScript unit tests.
+## Cron
+
+You're going to need to setup a cron job:
+```
+* * * * * php /path/to/paddle/artisan schedule:run 1>> /dev/null 2>&1
+```
+
+
+## Environment
+
+```
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=32 Character Random String
+
+DB_HOST=...
+DB_DATABASE=...
+DB_USERNAME=...
+DB_PASSWORD=...
+
+CACHE_DRIVER=file
+SESSION_DRIVER=file
+QUEUE_DRIVER=...
+
+MAIL_DRIVER=...
+MAIL_HOST=...
+MAIL_PORT=...
+MAIL_FROM_ADDRESS=admin@paddle.app
+MAIL_USERNAME=...
+MAIL_PASSWORD=...
+MAIL_ENCRYPTION=null
+
+WEBHOOK_SECRET=Random String
+SVN_BINARY=/usr/bin/svn
+
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+
+SSH_KEY_PATH=null
+
+GIT_BRANCH=master
+```
