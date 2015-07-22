@@ -3,7 +3,6 @@
 namespace App\Services\SVN;
 
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class Interactor
 {
@@ -71,10 +70,11 @@ class Interactor
      * Executes an SVN command.
      *
      * @param array|string $command
+     * @param bool         $ssh
      *
      * @return [bool, string]
      */
-    public function execute($command)
+    public function execute($command, $ssh = false)
     {
         if (is_array($command)) {
             $command = implode(' ', $command);
@@ -85,8 +85,13 @@ class Interactor
         with($process = new Process($this->binary().' '.$command))
             ->setWorkingDirectory($this->location)
             ->setTimeout(null)
-            ->setIdleTimeout(null)
-            ->run(function ($t, $buffer) use (&$output) {
+            ->setIdleTimeout(null);
+
+        if ($ssh) {
+            $process->setEnv(['SVN_SSH' => env('SSH_KEY_PATH')]);
+        }
+
+        $process->run(function ($t, $buffer) use (&$output) {
                 $output .= $buffer;
             });
 

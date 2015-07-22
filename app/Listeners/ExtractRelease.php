@@ -56,13 +56,17 @@ class ExtractRelease implements ShouldQueue
             return;
         }
 
-        list($success, $output) = $this->svn->at($path.'/'.$location)->build()
+        $svn = $this->svn->at($path.'/'.$location)->build()
             ->checkout()
             ->unsafe(rtrim($event->repository->svn, '/'))
             ->safe('./')
-            ->username($event->repository->username)
-            ->password($event->repository->password)
-            ->execute();
+            ->username($event->repository->username);
+
+        if (!$event->repository->use_ssh) {
+            $svn->password($event->repository->password);
+        }
+
+        list($success, $output) = $svn->execute($event->repository->use_ssh);
 
         if (!$success) {
             $this->release();

@@ -57,11 +57,11 @@ class Command
     /**
      * Executes the command.
      *
-     * @param bool $failable
+     * @param bool $ssh
      *
      * @return [bool, string]
      */
-    public function execute($failable = false)
+    public function execute($ssh = false)
     {
         return $this->svn->execute($this->command, $failable);
     }

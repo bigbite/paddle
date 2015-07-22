@@ -48,7 +48,7 @@ class UploadRelease implements ShouldQueue
         list(, $_output) = $this->svn->build()
             ->add()
             ->safe('trunk/*')
-            ->execute(true);
+            ->execute();
         $output .= $this->format($_output, $event);
 
         $this->svn->build()
@@ -56,7 +56,7 @@ class UploadRelease implements ShouldQueue
             ->safe('tags/'.basename($event->tag))
             ->m(true, $message)
             ->force()
-            ->execute(true);
+            ->execute();
 
         $this->remove($event->location.'/tags/'.basename($event->tag));
 
@@ -73,16 +73,20 @@ class UploadRelease implements ShouldQueue
             ->cp()
             ->safe('trunk')
             ->unsafe('tags/'.basename($event->tag))
-            ->execute(true);
+            ->execute();
         $output .= $this->format($_output, $event);
 
         $output .= '>>> Committing'.PHP_EOL;
-        list($success, $_output) = $this->svn->build()
+        $svn = $this->svn->build()
             ->commit()
             ->m(true, $message)
-            ->username($event->repository->username)
-            ->password($event->repository->password)
-            ->execute();
+            ->username($event->repository->username);
+
+        if (!$event->repository->use_ssh) {
+            $svn->password($event->repository->password);
+        }
+
+        list($success, $output) = $svn->execute($event->repository->use_ssh);
         $output .= $this->format($_output, $event);
 
         $output .= '>>> Committed "' . $message . '"';
