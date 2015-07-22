@@ -1,6 +1,6 @@
 # Paddle
 
-> A modified [Ship](ship.getherbert.com).
+> A modified [Ship](http://ship.getherbert.com).
 
 
 ## Installation
