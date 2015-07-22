@@ -27,7 +27,7 @@
 
                 <div class="input__row">
                     <div class="input__column">
-                        <input placeholder="f0ab47..." type="text" name="release" id="release">
+                        <input placeholder="latest" type="text" name="release" id="release">
                     </div>
                     <div class="input__column">
                         <button class="btn  btn--success  btn--small" type="submit">Release</button>
@@ -79,7 +79,7 @@
             <div class="input__row{{ $errors->has('svn') ? '  has-error' : '' }}">
                 <label for="svn">SVN Address</label>
                 <input type="url" name="svn" id="svn"
-                       value="{{ old('svn', $repository->svn ?: 'http://plugins.svn.wordpress.org/'.$repository->package) }}">
+                       value="{{ old('svn', $repository->svn) }}">
                 @if ($errors->has('svn'))
                     <span class="error-message">{{ $errors->first('svn') }}</span>
                 @endif

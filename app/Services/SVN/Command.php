@@ -63,7 +63,7 @@ class Command
      */
     public function execute($ssh = false)
     {
-        return $this->svn->execute($this->command, $failable);
+        return $this->svn->execute($this->command, $ssh);
     }
 
     /**

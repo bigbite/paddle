@@ -10,7 +10,10 @@
         "laravel/socialite": "^3.0@dev",
         "pear/versioncontrol_svn": "~0.5.2",
         "iron-io/iron_mq": "~2.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0"
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "pda/pheanstalk": "~3.0",
+        "predis/predis": "~1.0",
+        "aws/aws-sdk-php": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

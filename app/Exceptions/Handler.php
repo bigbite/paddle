@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
-use Bugsnag\BugsnagLaravel\BugsnagExceptionHandler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {

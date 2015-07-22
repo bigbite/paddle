@@ -15,8 +15,6 @@ $router->pattern('organisation', '[^\\/]+');
 $router->pattern('repository', '[^\\/]+\\/[^\\/]+');
 
 $router->get('/', ['as' => 'get::front.home', 'uses' => 'FrontController@home']);
-$router->get('/terms', ['as' => 'get::front.terms', 'uses' => 'FrontController@terms']);
-$router->get('/privacy', ['as' => 'get::front.privacy', 'uses' => 'FrontController@privacy']);
 
 $router->get('/sign-in', ['as' => 'get::oauth', 'uses' => 'OAuthController@get']);
 $router->get('/sign-in/redirect', ['as' => 'get::oauth.redirect', 'uses' => 'OAuthController@redirect']);

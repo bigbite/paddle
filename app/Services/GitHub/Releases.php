@@ -37,6 +37,8 @@ class Releases extends Interactor
      */
     public function link(Repository $repository, $tag)
     {
+        $tag = strlen($tag) === 0 ? env('GIT_BRANCH') : $tag;
+
         return 'repos/'.$repository->getRouteKey().'/zipball/'.$tag;
     }
 }

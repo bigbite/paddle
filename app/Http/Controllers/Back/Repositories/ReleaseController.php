@@ -39,11 +39,9 @@ class ReleaseController extends BaseController
      */
     public function release(Request $request, $repository, $release = null)
     {
-        $release = ltrim($release ?: $request->input('release'), '/');
+        $release = trim(ltrim($release ?: $request->input('release'), '/'));
 
-        if (!preg_match('~^[^/]+$~', $release)) {
-            $release = strlen(trim($release)) === 0 ? '(empty)' : $release;
-
+        if (!preg_match('~^[^/]+$~', $release) && strlen($release) !== 0) {
             $this->flash(
                 'Invalid release "'.$release.'"!',
                 BaseController::FLASH_ERROR
@@ -54,7 +52,21 @@ class ReleaseController extends BaseController
 
         $repository = $this->getRepository($repository);
 
-        event(new RepositoryWasReleased($repository, $release));
+        if (!$repository->rigged) {
+            $this->flash(
+                'This repository has not yet been set up, please complete the "Details" section!',
+                BaseController::FLASH_ERROR
+            );
+
+            return redirect()->route('get::back.repository', compact('repository'));
+        }
+
+        $release = strlen($release) === 0 ? env('GIT_BRANCH') : $release;
+
+        event(new RepositoryWasReleased(
+            $repository,
+            $release
+        ));
 
         $this->flash(
             'A deploy for '.$release.' has been queued!',
