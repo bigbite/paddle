@@ -6,7 +6,7 @@ Commit to GitHub and have it automatically synced to SVN.
 
  * Supports maunal syncing of the latest or a specific commit. 
  * Works with Github organisations.
- * Runs .paddle.sh before pushing to SVN, helpful if you need to run composer or remove files etc.
+ * Runs .paddle.sh before pushing to SVN (if it can find it within your git repository), helpful if you need to run composer or remove files etc.
 
 
 ## Installation
