@@ -22,7 +22,7 @@ On each deploy there-after:
 ## Worker
 
 You're going to need to setup a supervisor worker:
-```
+```ini
 [program:paddle-queue-listener]
 user=root
 command=php /path/to/paddle/artisan queue:listen --tries=3 --sleep=3 --timeout=60
@@ -40,14 +40,14 @@ numprocs_start=0
 ## Cron
 
 You're going to need to setup a cron job:
-```
+```sh
 * * * * * php /path/to/paddle/artisan schedule:run 1>> /dev/null 2>&1
 ```
 
 
 ## Environment
 
-```
+```ini
 APP_ENV=production
 APP_DEBUG=false
 APP_KEY=32 Character Random String
@@ -79,3 +79,26 @@ SSH_KEY_PATH=null
 
 GIT_BRANCH=master
 ```
+
+The environment follows basica Laravel environment rules (check Laravel's documentation for more information). For instance, if you want to use Mandrill for mail you can use these keys:
+```ini
+MAIL_DRIVER=mandrill
+MANDRILL_SECRET=...
+```
+
+If you wish to use Iron pull queues, then use theses keys:
+```ini
+QUEUE_DRIVER=iron
+
+IRON_HOST=...
+IRON_TOKEN=...
+IRON_PROJECT=...
+IRON_QUEUE=...
+```
+
+If you wish to use Beanstalkd:
+```ini
+QUEUE_DRIVER=beanstalkd
+```
+
+etc.
