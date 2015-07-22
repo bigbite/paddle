@@ -39,6 +39,10 @@ class DownloadRelease implements ShouldQueue
      */
     public function handle(RepositoryWasReleased $event)
     {
+        if ($event->repository->processing !== $event->tag) {
+            return;
+        }
+
         if (!$event->repository->rigged) {
             $this->emailFailure(
                 $event,

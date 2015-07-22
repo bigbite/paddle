@@ -37,7 +37,7 @@ class Repository extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'hook_id', 'email', 'name', 'svn', 'username', 'password'];
+    protected $fillable = ['id', 'hook_id', 'email', 'name', 'svn', 'username', 'password', 'processing', 'pushed_at'];
 
     /**
      * The attributes excluded from the model's JSON form.

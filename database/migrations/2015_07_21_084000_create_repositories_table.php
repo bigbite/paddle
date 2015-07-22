@@ -22,6 +22,8 @@ class CreateRepositoriesTable extends Migration
             $table->string('username', 1024)->nullable();
             $table->string('password', 2048)->nullable();
 
+            $table->string('processing', 255)->nullable();
+            $table->bigInteger('pushed_at')->unsigned()->default(0);
             $table->bigInteger('hook_id')->unsigned()->nullable();
 
             $table->bigInteger('organisation_id')->unsigned()->nullable();

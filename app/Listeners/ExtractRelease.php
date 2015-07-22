@@ -39,6 +39,10 @@ class ExtractRelease implements ShouldQueue
      */
     public function handle(ReleaseWasDownloaded $event)
     {
+        if ($event->repository->processing !== $event->tag) {
+            return;
+        }
+
         $path = storage_path('releases/'.$event->repository->getRouteKey());
         $location = time().'-'.str_random(16);
         if (!mkdir($path.'/'.$location, 0777, true)) {

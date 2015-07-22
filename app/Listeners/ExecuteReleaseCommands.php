@@ -38,6 +38,10 @@ class ExecuteReleaseCommands implements ShouldQueue
      */
     public function handle(ReleaseWasExtracted $event)
     {
+        if ($event->repository->processing !== $event->tag) {
+            return;
+        }
+
         list($success, $output) = $this->command
             ->at($event->location.'/trunk')
             ->execute();

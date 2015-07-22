@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Repository\Repository;
 use App\Events\RepositoryWasReleased;
 use Illuminate\Http\Request;
@@ -76,9 +77,25 @@ class WebhookController extends Controller
             return;
         }
 
+        $repository = $repositories->first();
+        $pushedAt = $request->input('repository.pushed_at');
+
+        if (!is_int($pushedAt)) {
+            $pushedAt = Carbon::parse($pushedAt)->timestamp;
+        }
+
+        if ($pushedAt <= $repository->pushed_at) {
+            return;
+        }
+
         $release = $request->input('after');
 
-        event(new RepositoryWasReleased($repositories->first(), $release));
+        $repository->update([
+            'processing' => $release,
+            'pushed_at' => $pushedAt,
+        ]);
+
+        event(new RepositoryWasReleased($repository, $release));
     }
 
     /**

@@ -63,6 +63,10 @@ class ReleaseController extends BaseController
 
         $release = strlen($release) === 0 ? env('GIT_BRANCH') : $release;
 
+        $repository->update([
+            'processing' => $release,
+        ]);
+
         event(new RepositoryWasReleased(
             $repository,
             $release

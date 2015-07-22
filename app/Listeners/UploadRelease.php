@@ -38,6 +38,10 @@ class UploadRelease implements ShouldQueue
      */
     public function handle(ReleaseCommandsWereExecuted $event)
     {
+        if ($event->repository->processing !== $event->tag) {
+            return;
+        }
+
         $this->svn->at($event->location);
 
         $message = $event->tag.' - Paddle';
