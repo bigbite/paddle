@@ -2,10 +2,16 @@
 
 > A modified [Ship](http://ship.getherbert.com).
 
+Commit to GitHub and have it automatically synced to SVN. 
+
+ * Supports maunal syncing of the latest or a specific commit. 
+ * Works with Github organisations.
+ * Runs .paddle.sh before pushing to SVN, helpful if you need to run composer or remove files etc.
+
 
 ## Installation
 
-If you're deploying with Peggy, it's really simple. Add it to Peggy, setup the [Environment](#environment), press Deploy.
+If you're deploying with [Peggy](https://getpeggy.com/), it's really simple. Add it to Peggy, setup the [Environment](#environment), press Deploy.
 
 Otherwise:
  * `git clone git@github.com:bigbitecreative/pebble.git`
