@@ -30,7 +30,7 @@
                 </object>
             </div>
 
-            <h1 class="page-hero__title">Tag a release on GitHub and have it automatically shipped to the SVN</h1>
+            <h1 class="page-hero__title">Commit to GitHub and have it automatically synced to SVN</h1>
 
             <a href="{{ url('sign-in/redirect') }}" class="page-hero__cta  btn"><b class="ico-github"></b>Sign in with GitHub</a>
         </div>
